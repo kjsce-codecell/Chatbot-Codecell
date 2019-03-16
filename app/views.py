@@ -15,10 +15,6 @@ def index():
 def chatbot():
     return render_template('chatbot.html')
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
-
 @app.route('/send_message',methods=['POST'])
 def send():
     message = request.form['message']
