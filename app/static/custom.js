@@ -1,11 +1,11 @@
 function submit_message(message) {
     $.post("/send_message", { message: message }, handle_response);
-
     function handle_response(data) {
         // append the bot repsonse to the div
+        console.log(data);
         $('.chat-container').append(`
-                <div class="chat-message col-md-5 offset-md-7 bot-message">
-                    ${data.message}
+                <div class="chat-message col-md-5 bot-message">
+                    ${data.fulfillmentText}
                 </div>
           `)
         // remove the loading indicator
@@ -22,14 +22,14 @@ $('#target').on('submit', function (e) {
     }
 
     $('.chat-container').append(`
-            <div class="chat-message col-md-5 human-message">
+            <div class="chat-message col-md-5 offset-md-7 human-message">
                 ${input_message}
             </div>
         `)
 
     // loading 
     $('.chat-container').append(`
-            <div class="chat-message text-center col-md-2 offset-md-10 bot-message" id="loading">
+            <div class="chat-message text-center col-md-2 bot-message" id="loading">
                 <b>...</b>
             </div>
         `)
