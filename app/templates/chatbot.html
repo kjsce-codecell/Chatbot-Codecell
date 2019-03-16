@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+	<meta charset="UTF-8">
+	<title>Chat Bot UI</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+	<div class="mainHead">
+		<div class="head">
+			<span>ChatBot</span>
+		</div>
+	</div> 
+	<div class="chat">
+		<div class="main">
+		</div>
+	</div>
+	<div class="send">
+		<!--<input type="input" class="txt1 form-cotrol">-->
+		<textarea class="form-control txt1" rows="3"></textarea>
+		<input type="button" class="btn btn1" value="SEND" onclick="sender()">
+	</div>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js'></script>
+	<script  src="{{ url_for('static', filename='chatbot.js')}}"></script>
+</body>
+
+</html>

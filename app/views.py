@@ -11,6 +11,9 @@ import os
 def index():
     return render_template("index.html")
 
+@app.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
 
 @app.route('/about')
 def about():
