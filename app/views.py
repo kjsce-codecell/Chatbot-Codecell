@@ -30,13 +30,14 @@ def send():
     return jsonify(response_text)
 
 def get_team():
-    text = ''
+    text = 'CODECELL<br>'
     with open('app/data/team.pkl', 'rb') as f:
         Team = pickle.load(f)
     for i in Team:
-        text += i + ' :\n'
+        text += i + ' :<br>'
         for mem in Team[i]:
-            text += mem[0] + '(' + mem[1] + ')\n'
+            text += mem[0] + '(' + mem[1] + ')<br>'
+        text += '<br>'
     return text
 
 def detect_intent_texts(project_id, session_id, text, language_code):
