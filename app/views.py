@@ -6,7 +6,9 @@ from app import app
 import json
 import dialogflow
 import os
+from .respond import *
 
+# UI Templates
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -15,15 +17,46 @@ def index():
 def chatbot():
     return render_template('chatbot.html')
 
+
+# Backend
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    """This method handles the http requests for the Dialogflow webhook
+    This is meant to be used in conjunction with the weather Dialogflow agent
+    """
+    req = request.get_json(silent=True, force=True)
+    try:
+        action = req.get('queryResult').get('action')
+    except AttributeError:
+        return 'json error'
+
+    print(req)
+    # Add processing for all the queries here according to detected intent 
+    if action == 'input.welcome':
+        res = welcome(req)
+    else:
+        log.error('Unexpected action.')
+        res = 'Kittu'
+
+    print('Action: ' + action)
+    print('Response: ' + res)
+    return make_response(jsonify({'fulfillmentText': res}))
+
+
+
+
+
+# Do Not Edit anything after this point -------------
+
 @app.route('/send_message',methods=['POST'])
 def send():
     message = request.form['message']
     print(message)
-    project_id = os.getenv('DIALOGFLOW_PROJECT')
-    print(project_id)
-    fulfillment_text = detect_intent_texts(project_id, "unique", message, 'en')
+    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
+    fulfillment_text = detect_intent_texts(project_id, "unasasique", message, 'en')
     response_text = { "fulfillmentText":  fulfillment_text }
-    print(response_text)
     return jsonify(response_text)
 
 def detect_intent_texts(project_id, session_id, text, language_code):
