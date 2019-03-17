@@ -16,17 +16,12 @@ function res(msg) {
  
 function submit_message(message) {
     $.post("/send_message", { message: message }, res);
-    function handle_response(data) {
-        // append the bot repsonse to the div
-        console.log(data);
-        $('.chat-container').append(`
-                <div class="chat-message col-md-5 bot-message">
-                    ${data.fulfillmentText}
-                </div>
-          `)
-        // remove the loading indicator
-        $("#loading").remove();
-    }
 }
-  
-  //var chat = {"Hi":"Hi","Hi2":"Hi2","Hi3":"Hi3"}
+
+var input = document.getElementById("send_msg");
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13 && input.value!=="") {
+        event.preventDefault();
+        document.getElementById('send_btn').click();
+    }
+});

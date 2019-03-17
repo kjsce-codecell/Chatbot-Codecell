@@ -5,8 +5,12 @@ from flask import render_template,make_response,jsonify,request
 from app import app
 import json
 import dialogflow
+<<<<<<< HEAD
 import os
 from .respond import *
+=======
+import os,pickle
+>>>>>>> 3e0bd2299398a3f1ae07736d81cdaa38e2136059
 
 # UI Templates
 @app.route('/')
@@ -61,13 +65,23 @@ def send():
     response_text = { "fulfillmentText":  fulfillment_text }
     return jsonify(response_text)
 
+def get_team():
+    text = 'CODECELL<br>'
+    with open('app/data/team.pkl', 'rb') as f:
+        Team = pickle.load(f)
+    for i in Team:
+        text += i + ' :<br>'
+        for mem in Team[i]:
+            text += mem[0] + '(' + mem[1] + ')<br>'
+        text += '<br>'
+    return text
+
 def detect_intent_texts(project_id, session_id, text, language_code):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
     if text:
-        text_input = dialogflow.types.TextInput(
-            text=text, language_code=language_code)
+        text_input = dialogflow.types.TextInput(text=text, language_code=language_code)
         query_input = dialogflow.types.QueryInput(text=text_input)
         response = session_client.detect_intent(
             session=session, query_input=query_input)
