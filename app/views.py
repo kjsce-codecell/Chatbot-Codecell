@@ -36,8 +36,10 @@ def webhook():
     # Add processing for all the queries here according to detected intent 
     if action == 'input.welcome':
         res = welcome(req)
+    elif action == 'register':
+        res = register(req)
     else:
-        log.error('Unexpected action.')
+        print('WrongggRegister')
         res = 'Kittu'
 
     print('Action: ' + action)
