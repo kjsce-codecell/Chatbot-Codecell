@@ -1,7 +1,160 @@
 # Define all the responses here use {{var}} for variables with var replaced with variable name ofc
 
-welcome_responses = [
+welcome_responses = [ 
     'Hi! How are you doing?',
     'Greetings! How can I assist?',
     'Greetings From CodeCell! How can we help you?'
 ]
+
+welcome_greet = [
+    "Nice to meet you ! I'm Korusuke.",
+    "Hello From the other side , I am your ovelord Korusuke , \n Bow before me!!😎",
+    "My name is Korusuke! I am Kiteretsu's bot assistant!"
+]
+
+welcome_goal = [
+    "My goal is to convince you to come the workshop and also tell u about my team of amazing cartoons 😊"
+]
+
+team_description = {
+    'Council': {
+        'phrase' : '',
+        'task' : '● Manage every workshop as a volunteer\n● Assist the Tech team (There is a lot of technical work)\n● Manage the official KJSCE Codecell Website\n● Encourage and Evangelise Coding culture in the college among peers\n● Contribute to any KJSCE Codecell Github Projects\n● Come up with innovative ideas\n● Maintain an interest in Competitive Coding and Development\n',
+        'skill' : '',
+    },
+    'Committee Head': {
+        'phrase' : 'Bhai! Inse panga na lena!',
+    },
+    'Technical': {
+        'phrase' : 'Question marks in our heads are scared of the deadly intelligent Tech Team',
+        'task' : '● Come together to fix and manage the technical aspects of each workshop andcontest\n● Forms the core of the technical council\n● Work as problem setter for national level contests on Codechef\n● Organise all the tech work for the events',
+        'skill' : ''
+    },
+    'Co-ordinators':{
+        'phrase' : 'The skills of inner communication is something that withholds our Co-ordinating Team',
+        'task' : '● The coordinators get to do literally everything. They are the gluons in this nucleus.\n● Content making for workshop, questions for codechef contests and promotion of the events\n● Often given the chance to be the lead spokesperson\n● Help the council to organize council events in every possible way.\n● Assist Tech Team, PR Team and Creative Team.',
+        'skill' : ''
+    }, 
+    'PR': {
+        'phrase' : 'Delight is the name of the conversations with our PR Team',
+        'task' : '● In - charge of publicity of various events\n● Responsible for intra college publicity\n● Manage KJSCE Codecell FB page',
+        'skill' : '● Strong communication skills\n● Writing Skills\n● Ability to converse with anyone and everyone'
+    },
+    'Creative': {
+        'phrase' : 'Designs are a part and parcel of our Creative Team',
+        'task' : '● Work on all designing aspects for Codecell.\n● Design posters for events/contests\n● UI/UX for KJSCE Codecell projects\n● Design the KJSCE Codecell Website',
+        'skill' : '● Should be familiar with Adobe Photoshop, CorelDraw.'
+    }
+} 
+
+team_members = {'Committee Head': [['Chirag Shetty',
+                     'Committee Head',
+                     'GitHub: @nurdtechie98',
+                     'https://github.com/nurdtechie98',
+                     'Codechef: @nurdtechie98',
+                     'https://www.codechef.com/users/nurdtechie98'],
+                     ['Nishchith Shetty',
+                     'Committee Head',
+                     'GitHub: @inishchith',
+                     'https://github.com/inishchith',
+                     'Codechef: @inishchith',
+                     'https://www.codechef.com/users/inishchith']],
+    'Technical': [['Neel Shah',
+                     'Tech Head',
+                     'GitHub: @Freelancer-98',
+                     'https://github.com/Freelancer-98',
+                     'Codechef: @shmabulock',
+                     'https://www.codechef.com/users/shmabulock'],
+                    ['Shivam Pawase',
+                     'Tech team',
+                     'GitHub: @shivam1708',
+                     'https://github.com/shivam1708',
+                     'Codechef: @shivam_1708',
+                     'https://www.codechef.com/users/shivam_1708'],
+                    ['Devansh Solanki',
+                     'Tech Team',
+                     'GitHub: @devanshsnlk',
+                     'https://github.com/devanshslnk',
+                     'Codechef: @devanshslnk',
+                     'https://www.codechef.com/users/devanshslnk'],
+                    ['Tushar Kadam',
+                     'Tech Team',
+                     'GitHub: @Kadam-Tushar',
+                     'https://github.com/Kadam-Tushar',
+                     'Codechef: @cis_pie',
+                     'https://www.codechef.com/users/cis_pie'],
+                    ['Akshay Padte',
+                     'Tech Team',
+                     'GitHub: @akshay-99',
+                     'https://github.com/akshay-99',
+                     'Codechef: @akshay_07cf',
+                     'https://www.codechef.com/users/akshay_07cf'],
+                    ['Rushang Gajjal',
+                     'Tech Team',
+                     'GitHub: @RusherRG',
+                     'https://github.com/RusherRG',
+                     'Codechef: @RusherRG',
+                     'https://www.codechef.com/users/rusherrg']],
+    'Co-ordinators': [['Dhruvi Vadalia',
+                    'Co-ordinator',
+                    'GitHub: @diggy-19',
+                    'https://github.com/diggy-19',
+                    'Codechef: @python_c99',
+                    'https://www.codechef.com/users/python_c99'],
+                   ['Karan Sheth',
+                    'Co-ordinator',
+                    'GitHub: @Korusuke',
+                    'https://github.com/Korusuke',
+                    'Codechef: @Karan1599',
+                    'https://www.codechef.com/users/Karan1599'],
+                   ['Aditya Prajapati',
+                    'Co-ordinator',
+                    'GitHub: @aditya1999',
+                    'https://github.com/aditya1999',
+                    'Codechef: @C0DE_BL00DED',
+                    'https://www.codechef.com/users/c0de_blooded']],
+ 'Creative': [['Sangram Desai',
+                    'Creative Team',
+                    'GitHub: @Sangramdesai123',
+                    'https://github.com/sangramdesai123',
+                    'Codechef: @Sangram123',
+                    'https://www.codechef.com/users/sangram123'],
+                   ['Shivanee Jaiswal',
+                    'Creative Team',
+                    'GitHub: @shivaneej',
+                    'https://github.com/shivaneej',
+                    'Codechef: @shivanee_j',
+                    'https://www.codechef.com/users/shivanee_j']],
+ 'PR': [['Hetal Kuvadia',
+              'PR Team',
+              'GitHub: @hetzz',
+              'https://github.com/hetzz',
+              'Codechef: @hetal_kuvadia',
+              'https://www.codechef.com/users/hetal_kuvadia1'],
+             ['Sana Pagarkar',
+              'PR Team',
+              'GitHub: @sanapagarkar',
+              'https://github.com/sanapagarkar',
+              'Codechef: @sana905',
+              'https://www.codechef.com/users/sana905']]}
+
+
+# for_rushang = {
+#     "fulfillmentMessages": [
+#         {
+#           "card":{
+#             "title": string,
+#             "subtitle": string,
+#             "imageUri": string,
+#             "buttons": [
+#                 {
+#                     {
+#                         "text": string,
+#                         "postback": string
+#                     }
+#                 }
+#             ]
+#         }
+#       } 
+#     ]
+# }
