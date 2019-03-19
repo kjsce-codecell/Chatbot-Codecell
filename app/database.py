@@ -42,6 +42,7 @@ def user_freq(user_id):
 
 def count():
     db = connect().logs
+    print("Counter")
     try:
         db.update({"counter":True},{"$inc":{"messages":1}})
         print("Update successful")

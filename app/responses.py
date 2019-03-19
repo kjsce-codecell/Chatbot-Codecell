@@ -25,7 +25,7 @@ team_description = {
     },
     'Committee Heads': {
         'phrase' : 'Bhai! Inse panga na lena!',
-        'task' : '● They try to mange us (most of the times, it\'s a massive fail) ●',
+        'task' : '● They try to manage us (most of the times, it\'s a massive fail) ●',
         'skill' : '' 
     },
     'Technical Team': {
