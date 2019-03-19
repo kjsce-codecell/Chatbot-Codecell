@@ -2,6 +2,12 @@
 def register_Name(req,data):
     res = {"fulfillmentMessages": [
         {
+            "image": {
+                "imageUri": 'https://wow.olympus.eu/webfile/img/1632/x=1024/oly_testwow_stage.jpg', #Replace with current poster
+                "accessibilityText": 'Event Poster'
+            }
+        },
+        {
             "text": {
                 "text": [
                     "Lets get you registered Quickly!!"
@@ -18,7 +24,7 @@ def register_Name(req,data):
         {
             "text": {
                 "text": [
-                    "First let's start with an easy one \n What's your Name?"
+                    "First let's start with an easy one \nWhat's your Name?"
                 ]
             }
         }, 
@@ -32,7 +38,8 @@ def register_Name(req,data):
     return res
 
 
-def register_Email(req,data):
+def register_Email(req, data):
+    
     res = {
         "fulfillmentMessages": [
         {
@@ -59,7 +66,23 @@ def register_Email(req,data):
     return res
 
 
-def register_Study(req,data):
+def register_College(req, data):
+    res = {
+        "fulfillmentMessages": [
+            {
+                "quickReplies": {
+                    "title": 'Which school/college do you study in?',
+                    "quickReplies": [
+                        'KJSCE'
+                    ]
+                }
+            },
+        ]}
+    print(res, 'Collegee')
+    return res
+
+
+def register_Year(req,data):
     res = {
         "fulfillmentMessages": [
             {
@@ -138,12 +161,6 @@ def registered_success(req,data):
     res = {
         "fulfillmentMessages": [
             {
-                "image": {
-                    "imageUri": 'https://media.giphy.com/media/11J8lEFfvHLipi/giphy.gif',
-                    "accessibilityText": 'string'
-             }
-            },
-            {
                 "text": {
                     "text": [
                         "Yayy!! you are successfully registered"
@@ -158,11 +175,15 @@ def registered_success(req,data):
                 }
             },
             {
-                "quickReplies": {
-                    "title": "In the mean time you could try my other features, Just ask me what they are ?",
-                    "quickReplies": [
-                        'What can you do?',
-                        'Nehh you are useless!!'
+                "image": {
+                    "imageUri": 'https://media.giphy.com/media/11J8lEFfvHLipi/giphy.gif', #Aditya Wala Image
+                    "accessibilityText": 'string'
+                }
+            },
+            {
+                "text": {
+                    "text": [
+                        "Pass has been sent to your Registered Email ID with futher Instructions!!"
                     ]
                 }
             },
@@ -174,4 +195,20 @@ def registered_success(req,data):
         ] 
         }
     print(res, 'successs')
+    return res
+
+
+def registered_failed(req, data):
+    res = {
+        "fulfillmentMessages": [
+            {
+                "text": {
+                    "text": [
+                        "😓Registration Failed! Email ID already exists🤯"
+                    ]
+                }
+            },
+            
+        ]
+    }
     return res

@@ -9,7 +9,7 @@ import os
 from .respond import *
 import os,pickle 
 import uuid
-from .respond import handle_song
+from .respond import handle_song, handle_team
 
 session_id = 'Default'
 app.secret_key = 'any random string'
@@ -57,6 +57,8 @@ def webhook():
         })
     elif intent == 'songin':
         return handle_song(req)
+    elif intent == 'teamevent':
+        return handle_team(req)
     elif action == 'input.welcome':
         res = welcome(req)
         return make_response(jsonify(res))
@@ -69,6 +71,10 @@ def webhook():
         return make_response(jsonify(res))
     elif action == 'team_info':
         res = team_info(req)
+        print(res)
+        return make_response(jsonify(res))
+    elif action == 'myfunction':
+        res = myfunction(req)
         print(res)
         return make_response(jsonify(res))
     

@@ -1,29 +1,32 @@
 # Define all the responses here use {{var}} for variables with var replaced with variable name ofc
 
 welcome_responses = [ 
-    'Hi! How are you doing?',
-    'Greetings! How can I assist?',
+    'Hi! How are you doing this fine day?',
+    'Greetings! How can I assist you?',
     'Greetings From CodeCell! How can we help you?'
+    'What\'s up with you this fine day?' 
 ]
 
 welcome_greet = [
-    "Nice to meet you ! I'm Korusuke.",
-    "Hello From the other side , I am your ovelord Korusuke , \n Bow before me!!😎",
+    "Nice to meet you! I'm Korusuke.",
+    "Hello From the other side , I am your ovelord Korusuke , \nBow down to me!!😎",
     "My name is Korusuke! I am Kiteretsu's bot assistant!"
 ]
 
 welcome_goal = [
-    "My goal is to convince you to come the workshop and also tell u about my team of amazing cartoons 😊"
+    "My goal is to convince you to come the workshop and also tell you about my team of amazing cartoons 😊"
 ]
 
 team_description = {
     'Council': {
-        'phrase' : '',
-        'task' : '● Manage every workshop as a volunteer\n● Assist the Tech team (There is a lot of technical work)\n● Manage the official KJSCE Codecell Website\n● Encourage and Evangelise Coding culture in the college among peers\n● Contribute to any KJSCE Codecell Github Projects\n● Come up with innovative ideas\n● Maintain an interest in Competitive Coding and Development\n',
+        'phrase' : 'The awe-inspiring, life-changing,hardworking council that brings you this awesome workshop 😁',
+        'task' : '● Manage every workshop as a volunteer\n● Assist the Tech team (There is a lot of technical work)\n● Manage the official KJSCE Codecell Website\n● Encourage and evangelise coding culture in the college among peers\n● Contribute to any KJSCE Codecell Github Projects\n● Come up with innovative ideas\n● Maintain an interest in Competitive Coding and Development\n',
         'skill' : '',
     },
     'Committee Heads': {
         'phrase' : 'Bhai! Inse panga na lena!',
+        'task' : '● They try to mange us (most of the times, it\'s a massive fail) ●',
+        'skill' : '' 
     },
     'Technical Team': {
         'phrase' : 'Question marks in our heads are scared of the deadly intelligent Tech Team',
