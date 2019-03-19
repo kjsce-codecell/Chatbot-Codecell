@@ -3,7 +3,12 @@ from .responses import *
 from pprint import pprint
 from .register import *
 import requests
- 
+import string
+from bs4 import BeautifulSoup
+from collections import Counter
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from flask import jsonify 
 def get_contexts(req):
     contexts = {}
     print(req)
@@ -53,6 +58,11 @@ def welcome(req):
                         'About Team'
                     ] 
                 }
+            },
+            {   
+                "telephonySynthesizeSpeech": {
+                    "text": "Hey There Awesome person , you are talking to Korusuke Bot.I can help you register for the codecell events and also tell you some funny and spicy facts about them."
+                }
             }
         ]
     }
@@ -80,58 +90,26 @@ def register(req):
 
 
 def team(req):
-    data = {}
-    data['team'] = req['queryResult']['parameters'].get('team')
-    # pprint(req)
+    part = req['queryResult']['parameters'].get('teampart')
     contexts = get_contexts(req)
-    # pprint(contexts)
-    
     text = ''
-    if len(data['team'])==1 and 'team' in data['team']:
+    if "Council" in part:
         for i in team_members:
             text += i + '<br>' + team_description[i]['phrase'] + '<br>'
             for mem in team_members[i]:
                 text += mem[0]+'\n'
             text += '<br>'
-
     else:
         for i in team_members:
-            if i in data['team']:
-                text += i + '<br>' + team_description[i]['phrase'] + '<br>'
-                for mem in team_members[i]:
-                    text +=  mem[0] + '\n'
-                text += '<br>'
-                break 
+            for j in part:
+                if i.find(j)!=-1:
+                    text += i + '<br>' + team_description[i]['phrase'] + '<br>'
+                    break
         else:
-            text = 'No such team in the CodeCell'
+            text = "Sorry. I don't understand"
+    print(text,part)
     texts = text.split('<br>')[:-1]
-    return gen_res(texts) 
-
-def team_info(req):
-    info = req['queryResult']['parameters'].get('team_info')
-    contexts = get_contexts(req)
-    pprint(contexts)
-    part = req['queryResult']['parameters'].get('teampart')
-    text = ''
-    if 'team_part' in contexts:
-        for i in contexts['team_part']:
-            part.extend(i['parameters']['team'])
-    print(part, info)
-    if part.count('team')==len(part):
-        for j in info: 
-            if j in team_description['Council']:
-                text = team_description['Council'][j]
-    else:
-        for i in team_description:
-            if i in part:
-                for j in info:
-                    if j in team_description[i]:
-                        text = team_description[i][j]
-                break
-        else:
-            text = "Sorry. I don't know."
-    texts = text.split('\n')
-    return gen_res(texts)       
+    return gen_res(texts)     
 
 def gen_res(li):
     res = {"fulfillmentMessages": [
@@ -145,10 +123,8 @@ def gen_res(li):
                 "subtitle": li[i+1],
                 "buttons": [
                     {
-                        
                         "text": "Learn More",
-                        "postback": "Know more about" + li[i]
-                        
+                        "postback": "What does the " + li[i] + " do?"  
                     }
                 ]
             }
@@ -176,3 +152,98 @@ def fill_form(data):
     print('Done Succesfull')
 
     return
+
+def get_cosine_sim(*strs): 
+    vectors = [t for t in get_vectors(*strs)]
+    return cosine_similarity(vectors)
+    
+def get_vectors(*strs):
+    text = [t for t in strs]
+    vectorizer = CountVectorizer(text)
+    vectorizer.fit(text)
+    return vectorizer.transform(text).toarray()
+def matches(inp, lines):
+    inp = inp.lower()
+    inp = inp.translate(str.maketrans('', '', string.punctuation))
+    gcls = []
+    count = 0
+    for line in lines:
+        line = line.lower()
+        line = line.translate(str.maketrans('', '', string.punctuation))
+        gcl = get_cosine_sim(line, inp)[0,1]
+        gcls.append(int(gcl*1000000))
+        # print('START', count,' :\n', line, '\n', gcl, end='\n\n')
+        count+=1
+    print(gcls.index(max(gcls)))
+    return gcls.index(max(gcls))
+
+def getsongname(lyrics):
+    
+    try:
+        lyrics2 = lyrics+' site:genius.com'
+        r2 = requests.get('https://cse.google.com/cse/element/v1?rsz=filtered_cse&num=1&hl=en&source=gcsc&gss=.com&cx=partner-pub-1936238606905173:8242090140&q='+lyrics2+'&safe=active&cse_tok=AKaTTZgl8Z01gcjfA5uOQop4YH9c:1552906151870&exp=csqr,4231019&callback=google.search.cse.api13080', 
+            headers={'referrer':"https://findmusicbylyrics.com/search?q="+lyrics2, 
+            "credentials":"omit", 
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Mobile Safari/537.36'
+        })
+        print('here 1,1')
+        t2 = r2.text[35:-2]
+        d = eval(t2)
+        url2=d['results'][0]['clicktrackUrl'][29:].split('&')[0]
+        print('here 1,2')
+        t = requests.get(url2).text
+        soup = BeautifulSoup(t)
+        song = soup.find_all('div', attrs={'class': 'lyrics'})[0].find('p').text
+        lines = song.split('\n')
+        lines = [i for i in lines if (i != '' and i[0]!='[')]
+        lno = matches(lyrics, lines)
+        print('here 1,3')
+        print(len(lines))
+        if lno >= len(lines):
+            conti = '...'
+        else:
+            conti = lines[lno+1]
+        title = soup.find_all('h1', attrs={'class':'header_with_cover_art-primary_info-title'})[0].text.split('(')[0]
+        print('1 runs')
+    except:
+        r = requests.get('https://songsear.ch/q/'+lyrics)
+        soup = BeautifulSoup(r.text)
+        l = soup.find_all('h2', attrs={'title':'Click to view just this song'})
+        li =soup.find_all('div', attrs={'class':'fragments'})
+        print((l[0].find('a').text.split('(')[0], str(li[0].find('p')).split('</mark>')[-1][:-4].replace('\n', '')))
+        re = str(li[0].find('p')).split('</mark>')[-1][:-4].replace('\n', '').split('..')[0]
+        rer = re[0]
+        for e in re[1:]:
+            if e in string.ascii_uppercase and e!='I':
+                break
+            rer+=e
+        title = l[0].find('a').text.split('(')[0]
+        conti = rer
+        print('2 runs')
+    
+    print('title', title)
+    print('conti', conti)
+    return title, conti
+
+
+
+
+def handle_song(req):
+    lyr = req['queryResult']['queryText']
+    songname, content = getsongname(lyr)
+    return jsonify({"fulfillmentMessages": [{
+                    "text": {
+                        "text":[content],
+                    }
+                }, {
+                    "text": {
+                        "text":[songname+'! I love this song!'],
+                    }
+                },
+                {   
+                "telephonySynthesizeSpeech": {
+                    "text": content
+                }
+            }],
+        })
+

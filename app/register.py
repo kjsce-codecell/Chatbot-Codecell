@@ -21,6 +21,11 @@ def register_Name(req,data):
                     "First let's start with an easy one \n What's your Name?"
                 ]
             }
+        }, 
+        {
+            "telephonySynthesizeSpeech": {
+                "text": "To get you registered i would like to know some details.First of all please tell me your good name."
+            }
         }
     ]}
     print(res,'Nameeee')
@@ -43,6 +48,11 @@ def register_Email(req,data):
                     "Oh I also need your Email ID" 
                 ]
             }
+        },
+        {
+            "telephonySynthesizeSpeech": {
+                "text": "Ok so hey " + str(data[0][1]) + "Now moving on what's your email id"
+            }
         }
     ]}
     print(res, 'Emaill') 
@@ -61,6 +71,11 @@ def register_Study(req,data):
                         'TY',
                         'LY'
                     ]
+                }
+            },
+            {
+                "telephonySynthesizeSpeech": {
+                    "text": "Ok superb , which year do you study in?"
                 }
             }
         ]
@@ -82,6 +97,11 @@ def register_Branch(req,data):
                         'ETRX',
                         'Mech'
                     ]
+                }
+            },
+            {
+                "telephonySynthesizeSpeech": {
+                    "text": "And one last thing which department are you in?"
                 }
             }
         ]
@@ -145,7 +165,12 @@ def registered_success(req,data):
                         'Nehh you are useless!!'
                     ]
                 }
-            }
+            },
+            {
+                "telephonySynthesizeSpeech": {
+                    "text": "Awesome so i'll just fill in the form for you quickly.And its done , you have successfully registered for the event , meet you there!"
+                }
+            } 
         ] 
         }
     print(res, 'successs')

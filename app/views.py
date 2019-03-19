@@ -4,11 +4,12 @@ from flask import render_template,make_response,jsonify,request,session
 
 from app import app
 import json
-import dialogflow
+import dialogflow_v2beta1 as dialogflow
 import os
 from .respond import *
 import os,pickle 
 import uuid
+from .respond import handle_song
 
 session_id = 'Default'
 app.secret_key = 'any random string'
@@ -36,13 +37,27 @@ def webhook():
     req = request.get_json(silent=True, force=True)
     try:
         action = req.get('queryResult').get('action')
+        intent = req.get('queryResult').get('intent').get('displayName')
     except AttributeError:
         return 'json error'
 
     print(get_contexts(req))
     # Add processing for all the queries here according to detected intent 
-    print('Action: ' + action)
-    if action == 'input.welcome':
+    print('Action: ' + str(action))
+    if intent == 'song':
+        return jsonify({"fulfillmentMessages": [{
+                    "text": {
+                        "text":["jam"],
+                    }
+                }],
+                "followupEventInput": {
+                "name": "songin",
+                "languageCode": "en-US"
+                }
+        })
+    elif intent == 'songin':
+        return handle_song(req)
+    elif action == 'input.welcome':
         res = welcome(req)
         return make_response(jsonify(res))
     elif action == 'register':
@@ -56,6 +71,7 @@ def webhook():
         res = team_info(req)
         print(res)
         return make_response(jsonify(res))
+    
     else:
         print('WrongggRegister')
         res = 'Kittu' 
@@ -92,7 +108,7 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         query_input = dialogflow.types.QueryInput(text=text_input)
         response = session_client.detect_intent(
             session=session, query_input=query_input) 
-        print(response,'guyguyguy')
+        print(response,'guyguy')
         return response.query_result.fulfillment_text
 
 

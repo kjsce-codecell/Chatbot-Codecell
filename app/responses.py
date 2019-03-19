@@ -22,44 +22,44 @@ team_description = {
         'task' : '● Manage every workshop as a volunteer\n● Assist the Tech team (There is a lot of technical work)\n● Manage the official KJSCE Codecell Website\n● Encourage and Evangelise Coding culture in the college among peers\n● Contribute to any KJSCE Codecell Github Projects\n● Come up with innovative ideas\n● Maintain an interest in Competitive Coding and Development\n',
         'skill' : '',
     },
-    'Committee Head': {
+    'Committee Heads': {
         'phrase' : 'Bhai! Inse panga na lena!',
     },
-    'Technical': {
+    'Technical Team': {
         'phrase' : 'Question marks in our heads are scared of the deadly intelligent Tech Team',
         'task' : '● Come together to fix and manage the technical aspects of each workshop andcontest\n● Forms the core of the technical council\n● Work as problem setter for national level contests on Codechef\n● Organise all the tech work for the events',
         'skill' : ''
     },
-    'Co-ordinators':{
+    'Co-ordinators Team':{
         'phrase' : 'The skills of inner communication is something that withholds our Co-ordinating Team',
         'task' : '● The coordinators get to do literally everything. They are the gluons in this nucleus.\n● Content making for workshop, questions for codechef contests and promotion of the events\n● Often given the chance to be the lead spokesperson\n● Help the council to organize council events in every possible way.\n● Assist Tech Team, PR Team and Creative Team.',
         'skill' : ''
     }, 
-    'PR': {
+    'PR Team': {
         'phrase' : 'Delight is the name of the conversations with our PR Team',
         'task' : '● In - charge of publicity of various events\n● Responsible for intra college publicity\n● Manage KJSCE Codecell FB page',
         'skill' : '● Strong communication skills\n● Writing Skills\n● Ability to converse with anyone and everyone'
     },
-    'Creative': {
+    'Creative Team': {
         'phrase' : 'Designs are a part and parcel of our Creative Team',
         'task' : '● Work on all designing aspects for Codecell.\n● Design posters for events/contests\n● UI/UX for KJSCE Codecell projects\n● Design the KJSCE Codecell Website',
         'skill' : '● Should be familiar with Adobe Photoshop, CorelDraw.'
     }
 } 
 
-team_members = {'Committee Head': [['Chirag Shetty',
-                     'Committee Head',
+team_members = {'Committee Heads': [['Chirag Shetty',
+                     'Committee Heads',
                      'GitHub: @nurdtechie98',
                      'https://github.com/nurdtechie98',
                      'Codechef: @nurdtechie98',
                      'https://www.codechef.com/users/nurdtechie98'],
                      ['Nishchith Shetty',
-                     'Committee Head',
+                     'Committee Heads',
                      'GitHub: @inishchith',
                      'https://github.com/inishchith',
                      'Codechef: @inishchith',
                      'https://www.codechef.com/users/inishchith']],
-    'Technical': [['Neel Shah',
+    'Technical Team': [['Neel Shah',
                      'Tech Head',
                      'GitHub: @Freelancer-98',
                      'https://github.com/Freelancer-98',
@@ -95,7 +95,7 @@ team_members = {'Committee Head': [['Chirag Shetty',
                      'https://github.com/RusherRG',
                      'Codechef: @RusherRG',
                      'https://www.codechef.com/users/rusherrg']],
-    'Co-ordinators': [['Dhruvi Vadalia',
+    'Co-ordinators Team': [['Dhruvi Vadalia',
                     'Co-ordinator',
                     'GitHub: @diggy-19',
                     'https://github.com/diggy-19',
@@ -113,7 +113,7 @@ team_members = {'Committee Head': [['Chirag Shetty',
                     'https://github.com/aditya1999',
                     'Codechef: @C0DE_BL00DED',
                     'https://www.codechef.com/users/c0de_blooded']],
- 'Creative': [['Sangram Desai',
+ 'Creative Team': [['Sangram Desai',
                     'Creative Team',
                     'GitHub: @Sangramdesai123',
                     'https://github.com/sangramdesai123',
@@ -125,7 +125,7 @@ team_members = {'Committee Head': [['Chirag Shetty',
                     'https://github.com/shivaneej',
                     'Codechef: @shivanee_j',
                     'https://www.codechef.com/users/shivanee_j']],
- 'PR': [['Hetal Kuvadia',
+ 'PR Team': [['Hetal Kuvadia',
               'PR Team',
               'GitHub: @hetzz',
               'https://github.com/hetzz',
