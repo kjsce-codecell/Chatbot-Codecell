@@ -180,17 +180,23 @@ def matches(inp, lines):
 def getsongname(lyrics):
     
     try:
-        lyrics2 = lyrics+' site:genius.com'
-        r2 = requests.get('https://cse.google.com/cse/element/v1?rsz=filtered_cse&num=1&hl=en&source=gcsc&gss=.com&cx=partner-pub-1936238606905173:8242090140&q='+lyrics2+'&safe=active&cse_tok=AKaTTZgl8Z01gcjfA5uOQop4YH9c:1552906151870&exp=csqr,4231019&callback=google.search.cse.api13080', 
-            headers={'referrer':"https://findmusicbylyrics.com/search?q="+lyrics2, 
-            "credentials":"omit", 
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Mobile Safari/537.36'
-        })
+        # lyrics2 = lyrics+' site:genius.com'
+        # r2 = requests.get('https://cse.google.com/cse/element/v1?rsz=filtered_cse&num=1&hl=en&source=gcsc&gss=.com&cx=partner-pub-1936238606905173:8242090140&q='+lyrics2+'&safe=active&cse_tok=AKaTTZgl8Z01gcjfA5uOQop4YH9c:1552906151870&exp=csqr,4231019&callback=google.search.cse.api13080', 
+        #     headers={'referrer':"https://findmusicbylyrics.com/search?q="+lyrics2, 
+        #     "credentials":"omit", 
+        #     'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Mobile Safari/537.36'
+        # })
+        # 
+        # t2 = r2.text[35:-2]
+        # d = eval(t2)
+        # url2=d['results'][0]['clicktrackUrl'][29:].split('&')[0]
+        r2 = requests.get('https://www.googleapis.com/customsearch/v1?q='+lyrics+'&cx=010037727290940322759%3Alfq5lr9jjek&num=1&key=AIzaSyBE_yhmpb0CwmSHG0d4KPh91YEFrgyvIy4')
         print('here 1,1')
-        t2 = r2.text[35:-2]
-        d = eval(t2)
-        url2=d['results'][0]['clicktrackUrl'][29:].split('&')[0]
+        d = eval(r2.text)
+        url2 = d['items'][0]['link']
         print('here 1,2')
+        title = d['items'][0]['pagemap']['metatags'][0]['og:title']
+        
         t = requests.get(url2).text
         soup = BeautifulSoup(t)
         song = soup.find_all('div', attrs={'class': 'lyrics'})[0].find('p').text
@@ -203,7 +209,7 @@ def getsongname(lyrics):
             conti = '...'
         else:
             conti = lines[lno+1]
-        title = soup.find_all('h1', attrs={'class':'header_with_cover_art-primary_info-title'})[0].text.split('(')[0]
+        # title = soup.find_all('h1', attrs={'class':'header_with_cover_art-primary_info-title'})[0].text.split('(')[0]
         print('1 runs')
     except:
         r = requests.get('https://songsear.ch/q/'+lyrics)
