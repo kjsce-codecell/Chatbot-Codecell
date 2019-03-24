@@ -23,7 +23,8 @@
 
 ------------------------------------------
 ### Technology Stack
-<a href="https://ngrok.com/download"><img src="./assests/ngrok.PNG" height=80px ></a>  <a href="https://developers.facebook.com/"><img src="./assests/Messenger.PNG" height=80px ></a>  <a href="https://signup.heroku.com/login"><img src="./assests/Heroku.PNG" height=80px ></a>  <a href="https://console.dialogflow.com/api-client/#/login"><img src="./assests/Dialogue Flow.PNG" height=80px ></a>
+<a href="http://flask.pocoo.org/"><img src="./assests/Flask.png" height=80px ></a> <a 
+href="https://ngrok.com/download"><img src="./assests/ngrok.PNG" height=80px ></a>  <a href="https://developers.facebook.com/"><img src="./assests/Messenger.PNG" height=80px ></a>  <a href="https://signup.heroku.com/login"><img src="./assests/Heroku.PNG" height=80px ></a>  <a href="https://console.dialogflow.com/api-client/#/login"><img src="./assests/Dialogue Flow.PNG" height=80px ></a>
 
 ------------------------------------------
 <p align="center">
