@@ -23,8 +23,9 @@
 
 ------------------------------------------
 ### Technology Stack
-<a href="http://flask.pocoo.org/"><img src="./assests/Flask.png" height=90px ></a> <a 
-href="https://ngrok.com/download"><img src="./assests/ngrok.PNG" height=90px ></a> <a href="https://console.dialogflow.com/api-client/#/login"><img src="./assests/Dialogue Flow.PNG" height=90px ></a> <a href="https://signup.heroku.com/login"><img src="./assests/Heroku.PNG" height=90px ></a> <a href="https://developers.facebook.com/"><img src="./assests/Messenger.PNG" height=90px ></a> 
+<a href="http://flask.pocoo.org/"><img src="./assests/Flask.png" width=18% ></a> <a 
+href="https://ngrok.com/download"><img src="./assests/ngrok.PNG" width=18% ></a> <a 
+href="https://console.dialogflow.com/api-client/#/login"><img src="./assests/Dialogue Flow.PNG" width=35% ></a> <a href="https://signup.heroku.com/login"><img src="./assests/Heroku.PNG" width=12% ></a> <a href="https://developers.facebook.com/"><img src="./assests/Messenger.PNG" width=12% ></a> 
 
 ------------------------------------------
 <p align="center">
