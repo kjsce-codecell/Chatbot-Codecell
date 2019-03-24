@@ -141,23 +141,3 @@ team_members = {'Committee Heads': [['Chirag Shetty',
               'Codechef: @sana905',
               'https://www.codechef.com/users/sana905']]}
 
-
-# for_rushang = {
-#     "fulfillmentMessages": [
-#         {
-#           "card":{
-#             "title": string,
-#             "subtitle": string,
-#             "imageUri": string,
-#             "buttons": [
-#                 {
-#                     {
-#                         "text": string,
-#                         "postback": string
-#                     }
-#                 }
-#             ]
-#         }
-#       } 
-#     ]
-# }

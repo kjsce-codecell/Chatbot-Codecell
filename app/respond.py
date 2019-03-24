@@ -1,23 +1,16 @@
-import random
-import re
+import re, os, random, requests, string
 from .responses import *
 from pprint import pprint
 from .register import *
 from .database import *
 from .passes import *
 from .mail import *
-import requests 
-from flask import request
-import string
 from bs4 import BeautifulSoup
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from flask import jsonify
-import os
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
+from flask import jsonify, request
+from PIL import Image, ImageDraw, ImageFont
 
 def get_contexts(req):
     contexts = {}
@@ -258,7 +251,7 @@ def gen_res(li):
 
 
 def fill_form(data):
-
+    #fill google form using get request dont forget to update if form is changed
     url = 'https://docs.google.com/forms/d/e/1FAIpQLSdqBWG3rFSRYNvwfzfB9ZYY6MqGwXYnV9QwHiQ6rylSha33Aw/formResponse'
     form_data = {'entry.1109606640': data[0][1],
                  'entry.686652295': data[1][1],
@@ -276,10 +269,10 @@ def fill_form(data):
     return
 
 
+#functions used for song matching 
 def get_cosine_sim(*strs):
     vectors = [t for t in get_vectors(*strs)]
     return cosine_similarity(vectors)
-
 
 def get_vectors(*strs):
     text = [t for t in strs]
@@ -302,7 +295,6 @@ def matches(inp, lines):
         count += 1
     print(gcls.index(max(gcls)))
     return gcls.index(max(gcls))
-
 
 def getsongname(lyrics):
 
@@ -383,7 +375,7 @@ def handle_song(req):
     }],
     })
 
-
+#who gave name as mydunction??
 def myfunction(req):
     res = {
         "fulfillmentMessages": [
