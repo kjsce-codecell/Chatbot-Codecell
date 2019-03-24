@@ -36,6 +36,6 @@
 </p>
 
 ------------------------------------------
-<h4 align="center">Made by Team <img src="./assests/Codecell.png" heigth=80px width=80px > with <img src="./assests/Love.png" heigth=10px width=15px>.</h4>
+<h4 align="center">Made by Team <img src="./assests/code.png" heigth=80px width=80px > with <img src="./assests/Love.png" heigth=10px width=15px>.</h4>
 
 
