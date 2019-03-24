@@ -7,7 +7,7 @@
 
 ------------------------------------------
 
-- This registration bot was made for the `ChatBot Bootcamp workshop` organised by `KJSCE Codecell`.
+- This registration bot was made for the `ChatBot Bootcamp workshop` organised by the `KJSCE Codecell`.
 - This bot is sort of a demo bot which was taught in the workshop.
 - The workshop saw 200 registrations done via this bot and almost 130 such bots were deployed during the workshop in a similar fashion.
 - `KJSCE Codecell` is a non-profit council and hence this workshop was free of charge.
@@ -17,12 +17,12 @@
 ### Features
 
 - `Register`- It took details and confirmed the registration of the user.
-- `Sing`-It was the keyword and initialised a sing along feature of the bot to continue lyrics to the song suggested by the user.
+- `Sing`-It was the keyword and initialised a sing along feture of the bot to continue lyrics to the song suggested by the user.
 - `Call`- One could call the bot at the no. provided and have a pleasant conversation with it.
 
 ------------------------------------------
 ### Technology Stack
-<img src="./assests/ngrok.PNG" height=80px >  <img src="./assests/Messenger.PNG" height=80px >  <img src="./assests/Heroku.PNG" height=80px >  <img src="./assests/Dialogue Flow.PNG" height=80px >
+<a href="https://ngrok.com/download"><img src="./assests/ngrok.PNG" height=80px ></a>  <a href="https://developers.facebook.com/"><img src="./assests/Messenger.PNG" height=80px ></a>  <a href="https://signup.heroku.com/login"><img src="./assests/Heroku.PNG" height=80px ></a>  <a href="https://console.dialogflow.com/api-client/#/login"><img src="./assests/Dialogue Flow.PNG" height=80px ></a>
 
 ------------------------------------------
 <p align="center">
