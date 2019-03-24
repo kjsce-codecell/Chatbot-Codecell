@@ -9,7 +9,7 @@ welcome_responses = [
 
 welcome_greet = [
     "Nice to meet you! I'm Korusuke.",
-    "Hello From the other side , I am your ovelord Korusuke , \nBow down to me!!😎",
+    "Hello From the other side(Real World) , I am Korusuke bot😎",
     "My name is Korusuke! I am Kiteretsu's bot assistant!"
 ]
 
@@ -21,30 +21,30 @@ team_description = {
     'Council': {
         'phrase' : 'The awe-inspiring, life-changing,hardworking council that brings you this awesome workshop 😁',
         'task' : '● Manage every workshop as a volunteer\n● Assist the Tech team (There is a lot of technical work)\n● Manage the official KJSCE Codecell Website\n● Encourage and evangelise coding culture in the college among peers\n● Contribute to any KJSCE Codecell Github Projects\n● Come up with innovative ideas\n● Maintain an interest in Competitive Coding and Development\n',
-        'skill' : '',
+        'skill' : 'Pure awesomeness',
     },
     'Committee Heads': {
         'phrase' : 'Bhai! Inse panga na lena!',
-        'task' : '● They try to manage us (most of the times, it\'s a massive fail) ●',
-        'skill' : '' 
+        'task' : '● They try to manage us (most of the times, it\'s a massive fail)',
+        'skill' : 'They try to manage us (usually they fail, but its the thought that counts', 
     },
     'Technical Team': {
-        'phrase' : 'Question marks in our heads are scared of the deadly intelligent Tech Team',
+        'phrase' : 'They like technology more than humans',
         'task' : '● Come together to fix and manage the technical aspects of each workshop andcontest\n● Forms the core of the technical council\n● Work as problem setter for national level contests on Codechef\n● Organise all the tech work for the events',
-        'skill' : ''
+        'skill' : 'Can deal when winter comes for any related to the technological stuff, not when it comes to human interaction'
     },
     'Co-ordinators Team':{
-        'phrase' : 'The skills of inner communication is something that withholds our Co-ordinating Team',
+        'phrase' : 'Their skills of communication hold the team together',
         'task' : '● The coordinators get to do literally everything. They are the gluons in this nucleus.\n● Content making for workshop, questions for codechef contests and promotion of the events\n● Often given the chance to be the lead spokesperson\n● Help the council to organize council events in every possible way.\n● Assist Tech Team, PR Team and Creative Team.',
-        'skill' : ''
+        'skill' : 'Jacks of the trade and masters of few'
     }, 
     'PR Team': {
-        'phrase' : 'Delight is the name of the conversations with our PR Team',
+        'phrase' : 'They are the team\'s only form of communication to the outside world, the rest of us can\'t deal with the weird humans',
         'task' : '● In - charge of publicity of various events\n● Responsible for intra college publicity\n● Manage KJSCE Codecell FB page',
-        'skill' : '● Strong communication skills\n● Writing Skills\n● Ability to converse with anyone and everyone'
+        'skill' : '● Strong communication skills\n● Writing Skills\n● Ability to converse with anyone and everyone '
     },
     'Creative Team': {
-        'phrase' : 'Designs are a part and parcel of our Creative Team',
+        'phrase' : 'They\'re creative (Please insert creative quote here, considering we aren\'t the creative ones)',
         'task' : '● Work on all designing aspects for Codecell.\n● Design posters for events/contests\n● UI/UX for KJSCE Codecell projects\n● Design the KJSCE Codecell Website',
         'skill' : '● Should be familiar with Adobe Photoshop, CorelDraw.'
     }

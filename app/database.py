@@ -13,14 +13,16 @@ def check_email(email):
     db = connect().chatbot_workshop
     if db.find_one({'Email': email}):
         print("Already Present")
-        return 0
-    return 1
+        return 1
+    return 0
 
 
 def add_participant(participant):
     db = connect().chatbot_workshop
+    if check_email(participant['Email']):
+        return 0
+    participant['Payment'] = False
     db.insert(participant)
-    if check_email()
     return 1
 
 def user_freq(user_id):

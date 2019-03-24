@@ -3,34 +3,34 @@ def register_Name(req,data):
     res = {"fulfillmentMessages": [
         {
             "image": {
-                "imageUri": 'https://wow.olympus.eu/webfile/img/1632/x=1024/oly_testwow_stage.jpg', #Replace with current poster
+                "imageUri": 'http://sov.surge.sh/Sources%20of%20vitamins_files/Chatbot_Poster.jpeg', #Replace with current poster
                 "accessibilityText": 'Event Poster'
             }
         },
         {
             "text": {
                 "text": [
-                    "Lets get you registered Quickly!!"
+                    "Lets get you registered quickly!!"
                 ]
             }
         },
         {
             "text": {
                 "text": [
-                    "I just need to ask you a few questions first"
+                    "You just need to answer a few questions first😇"
                 ]
             }
         },
         {
             "text": {
                 "text": [
-                    "First let's start with an easy one \nWhat's your Name?"
+                    "Let's start with something simple \nWhat's your Name - the one written on your birth certificate?"
                 ]
             }
         }, 
         {
             "telephonySynthesizeSpeech": {
-                "text": "To get you registered i would like to know some details.First of all please tell me your good name."
+                "text": "To get you registered, we need some details.Give us your name - the one on your birth certificate."
             }
         }
     ]}
@@ -45,20 +45,20 @@ def register_Email(req, data):
         {
             "text": {
                 "text": [
-                    "Hey there " + str(data[0][1])
+                    "Hello there " + str(data[0][1]) + " \nIts nice to know your name, now I can stalk you🙃"
                 ]
             }
         },
         {
             "text": {
                 "text": [
-                    "Oh I also need your Email ID" 
+                    "Oh I also need your Email ID, for better stalking purposes \n _wink wink_" 
                 ]
             }
         },
         {
             "telephonySynthesizeSpeech": {
-                "text": "Ok so hey " + str(data[0][1]) + "Now moving on what's your email id"
+                "text": "So " + str(data[0][1]) + "I hope I pronounced your name correctly, we need your email id"
             }
         }
     ]}
@@ -71,7 +71,7 @@ def register_College(req, data):
         "fulfillmentMessages": [
             {
                 "quickReplies": {
-                    "title": 'Which school/college do you study in?',
+                    "title": 'Please name the institution you are forced go to everyday, we mean your school/college name',
                     "quickReplies": [
                         'KJSCE'
                     ]
@@ -87,7 +87,7 @@ def register_Year(req,data):
         "fulfillmentMessages": [
             {
                 "quickReplies": {
-                    "title": 'Btw which year do you study in?',
+                    "title": 'How far have you managed to reach with regards to your education thus far? I.e. your year of study',
                     "quickReplies": [
                         'FY',
                         'SY',
@@ -98,7 +98,7 @@ def register_Year(req,data):
             },
             {
                 "telephonySynthesizeSpeech": {
-                    "text": "Ok superb , which year do you study in?"
+                    "text": "Please state your year of study"
                 }
             }
         ]
@@ -112,7 +112,7 @@ def register_Branch(req,data):
         "fulfillmentMessages": [
             {
                 "quickReplies": {
-                    "title": 'Accha so u in ' + str(data[3][1]) + 'but in which Branch ?',
+                    "title": 'Great, so you\'re in ' + str(data[2][1]) + ',but..uhm...in which Branch?',
                     "quickReplies": [
                         'Comps',
                         'IT',
@@ -124,7 +124,7 @@ def register_Branch(req,data):
             },
             {
                 "telephonySynthesizeSpeech": {
-                    "text": "And one last thing which department are you in?"
+                    "text": "Last thing, helps me add more filters to my search parameters while stalking, your department/branch of study?"
                 }
             }
         ]
@@ -132,7 +132,7 @@ def register_Branch(req,data):
     print(res, 'Branchh')
     return res
 
-def registered_success(req,data):
+def registered_success(req,data,img_url):
     # res = {
     #     "fulfillmentMessages": [
     #         {
@@ -170,26 +170,26 @@ def registered_success(req,data):
             {
                 "text": {
                     "text": [
-                        "See you at the workshop!!"
+                        "See you at the workshop!!(I don't mean me, my council members will, after all, I'm just a bot😔"
                     ]
                 }
             },
             {
                 "image": {
-                    "imageUri": 'https://media.giphy.com/media/11J8lEFfvHLipi/giphy.gif', #Aditya Wala Image
+                    "imageUri": img_url, #Aditya Wala Image
                     "accessibilityText": 'string'
                 }
             },
             {
                 "text": {
                     "text": [
-                        "Pass has been sent to your Registered Email ID with futher Instructions!!"
+                        "Your pass will be sent to your registered Email ID with futher instructions!!"
                     ]
                 }
             },
             {
                 "telephonySynthesizeSpeech": {
-                    "text": "Awesome so i'll just fill in the form for you quickly.And its done , you have successfully registered for the event , meet you there!"
+                    "text": "Awesome, so I'll just fill in the form for you quickly. Aaaaaaaand.....its done , you have been successfully registered for the event! \n Be there or be square◾ \n😊"
                 }
             } 
         ] 

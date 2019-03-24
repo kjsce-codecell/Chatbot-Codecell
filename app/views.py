@@ -10,6 +10,7 @@ from .respond import *
 import os,pickle 
 import uuid
 from .respond import handle_song, handle_team
+from .database import *
 
 session_id = 'Default'
 app.secret_key = 'any random string'
@@ -40,7 +41,15 @@ def webhook():
         intent = req.get('queryResult').get('intent').get('displayName')
     except AttributeError:
         return 'json error'
-
+    try:
+        count()
+        print("Counter Called")
+        #print("Contexts : ",req['queryResult']['outputContexts'])
+        fb_id = req['queryResult']['outputContexts'][0]['parameters'].get("facebook_sender_id")
+        #print("FB id :",fb_id)
+        user_freq(fb_id)
+    except:
+        print("FB_ID_NOT found")
     print(get_contexts(req))
     # Add processing for all the queries here according to detected intent 
     print('Action: ' + str(action))
@@ -68,7 +77,7 @@ def webhook():
     elif action == 'team':
         res = team(req)
         print(res)
-        return make_response(jsonify(res))
+        return res
     elif action == 'team_info':
         res = team_info(req)
         print(res)
@@ -94,7 +103,7 @@ def webhook():
 def send():
     message = request.form['message']
     print("Incoming Message :",message)
-    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
+    project_id = os.getenv()
     try:
         session_id = session['uid']
     except:
@@ -117,4 +126,11 @@ def detect_intent_texts(project_id, session_id, text, language_code):
         print(response,'guyguy')
         return response.query_result.fulfillment_text
 
+
+from flask import send_file
+
+@app.route('/get_image')
+def get_image():
+    filename = 'static/passes/' + request.args.get('name')
+    return send_file(filename, mimetype='image/jpeg')
 

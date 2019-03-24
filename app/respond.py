@@ -3,8 +3,11 @@ import re
 from .responses import *
 from pprint import pprint
 from .register import *
-#from .database import *
-import requests
+from .database import *
+from .passes import *
+from .mail import *
+import requests 
+from flask import request
 import string
 from bs4 import BeautifulSoup
 from collections import Counter
@@ -12,7 +15,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from flask import jsonify
 import os
-
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 
 def get_contexts(req):
     contexts = {}
@@ -32,10 +37,11 @@ def get_contexts(req):
 
 def welcome(req):
     query = req['queryResult']['queryText']
-    if query == 'Get Started':
+    if query == 'FACEBOOK_WELCOME':
         # Rushangs Database increase count function which will probably record more stuff also this in try catch pplzz
         try:
             count()
+            print("Counter Called")
             #print("Contexts : ",req['queryResult']['outputContexts'])
             fb_id = req['queryResult']['outputContexts'][0]['parameters'].get("facebook_sender_id")
             #print("FB id :",fb_id)
@@ -47,7 +53,7 @@ def welcome(req):
                 {
                     "image": {
                         "imageUri": 'http://www.pikabit.net/wp-content/uploads/2012/10/yamato2.gif',
-                        "accessibilityText": 'Hey Theree'
+                        "accessibilityText": 'Helloooooo human, greetings'
                     }
                 },
                 {
@@ -69,14 +75,14 @@ def welcome(req):
                 {
                     "text": {
                         "text": [
-                            "I can do many things like : \n- Help you get a seat at the Event\n- Tell you about my team\n- Sing Along with you(Hint:Just type Sing / Sing along with me)"
+                            "I can do a lot things that most humans can't (and I can't do a lot of things that humans can, but that's a different story altogether): \n- Help you get a seat at the Event\n- Tell you about my team\n- Sing Along with you(Hint:Just type Sing / Sing along with me)"
 
                         ]
                     }
                 },
                 {
                     "telephonySynthesizeSpeech": {
-                        "text": "Hey There Awesome person , you are talking to Korusuke Bot.I can help you register for the codecell events and also tell you some funny and spicy facts about them."
+                        "text": "Hey there Delilah, What's it like in New York city?... \nOh oops🤭, I meant to say hi to you but got carried away by that cool song\n Anyways, awesome person, today's your lucky day,  you're talking to Korusuke Bot. I can help you register for the codecell events and also tell you some juicy gossip about them."
                     }
                 }
             ]
@@ -100,8 +106,18 @@ def welcome(req):
                     }
                 },
                 {
+                "quickReplies": {
+                    "title": 'Some things to try out:',
+                    "quickReplies": [
+                        'Register for the workshop',
+                        'Sing Along',
+                        'About Team'
+                    ]
+                    }
+                },
+                {
                     "telephonySynthesizeSpeech": {
-                        "text": "Hey There Amazing person."
+                        "text": "Hey There you amazing human, you."
                     }
                 }
             ]
@@ -129,15 +145,25 @@ def register(req):
         participant[field[0]] = field[1]
     if add_participant(participant):
         fill_form(data)
-        res = registered_success(req, data)
+        pass_name = pass_gen(participant['Name'],participant['Email'])
+        # data.append(['Pass_Name',pass_name])
+        img_url = request.url_root + 'get_image?name=' + pass_name
+        try:
+            sendMail(participant['Email'],'app/static/passes/'+pass_name)
+        except Exception as e:
+            print(str(e))
+            print('email failed')
+            pass
+        res = registered_success(req, data,img_url)
     else:
         res = registered_failed(req, data) #Email id exists
     return res
 
-
 def team(req):
-    if 'What does the ' in req['queryResult']['queryText'] or 'List the Members of ' in req['queryResult']['queryText']:
-        handle_team(req) 
+    queryText = req['queryResult']['queryText']
+    print(queryText)
+    if 'What does the ' in req['queryResult']['queryText'] or 'List the members of ' in req['queryResult']['queryText']:
+        return handle_team(req) 
     part = req['queryResult']['parameters'].get('teampart')
     contexts = get_contexts(req)
     text = ''
@@ -157,7 +183,7 @@ def team(req):
                     # print(text)
                     break
         if text == '':
-            text = "Sorry. I don't understand"
+            text = "I'm sorry. I didn't quite get that"
     print(text, part)
     texts = text.split('<br>')[:-1]
     return gen_res(texts)
@@ -170,20 +196,29 @@ def handle_team(req):
     querytext = req['queryResult']['queryText']
     print(querytext)
     part = req['queryResult']['parameters'].get('teampart')
-    response_text = part+'\n\n'
+    print(part)
+    response_text=''
     if 'List the members of ' in querytext:
-        mem=team_members[part][1]
-        
+        i = 0
+        if part[i]=='Council':
+            i+=1
+        response_text = part[i]+'\n\n'
+        mem=team_members[part[i]]
+        #print(mem)
         for member in mem:
-            response_text = member[0]+'\n'
+            response_text += member[0]+'\n'
     else:
-        response_text+=team_description[part[1]]
+        i = 0
+        if part[i]=='Council':
+            i+=1
+        response_text = part[i]+'\n\n'
+        response_text+=team_description[part[i]]['task']
         
-
+    print('\n\n'+response_text)
     return jsonify({
         "fulfillmentMessages": [{
                     "text": {
-                        "text": [response_text],
+                        "text": [response_text]
                     }
         }]
     })
@@ -219,7 +254,7 @@ def gen_res(li):
         # }
 
     print(res)
-    return res
+    return jsonify(res)
 
 
 def fill_form(data):
@@ -356,14 +391,14 @@ def myfunction(req):
                 "text": {
                     "text": [
 
-                        "I can do a lot of stuff cause I am smart 😎 Here are some cool things to try out"
+                        "I can do a lot of stuff cause I am smart (well honestly because my creators added a lot of functions since they had a lot of time and wanted you to have a good time when you used me😊) 😎 Here are some cool things you can try out"
                     ]
                 }
             },
             {
                 "text": {
                     "text": [
-                        "I would Like to register for the awesome event you guys are hosting"
+                        "Register for the awesome workshop my council is hosting on 23rd March, 2019"
 
                     ]
                 }
@@ -379,7 +414,7 @@ def myfunction(req):
             {
                 "text": {
                     "text": [
-                        "I would like to know more about your team"
+                        "Learn more about my council members"
 
                     ]
                 }
@@ -387,7 +422,7 @@ def myfunction(req):
             {
                 "text": {
                     "text": [
-                        "Or you could try asking me personal questions about me🤫 but I won't always answer them 🤪"
+                        "Or you could try asking me personal questions🤭\n But I might not answer them 🤫"
 
                     ]
                 }
