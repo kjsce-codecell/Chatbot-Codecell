@@ -22,13 +22,13 @@
 
 ------------------------------------------
 ### Technology Stack
-<img src="./assests/webhook.png" height=80px >
-<img src="./assests/RestAPI.png" height=80px >
-<img src="./assests/ngrok.png" height=80px >
-<img src="./assests/Messenger.png" height=80px >
-<img src="./assests/Heroku.png" height=80px >
-<img src="./assests/Gunicorn.png" height=80px >
-<img src="./assests/Dialogue Flow.png" height=80px >
+<img src="./assests/webhook.PNG" height=80px >
+<img src="./assests/RestAPI.PNG" height=80px >
+<img src="./assests/ngrok.PNG" height=80px >
+<img src="./assests/Messenger.PNG" height=80px >
+<img src="./assests/Heroku.PNG" height=80px >
+<img src="./assests/Gunicorn.PNG" height=80px >
+<img src="./assests/Dialogue Flow.PNG" height=80px >
 
 ------------------------------------------
 <p align="center">
@@ -36,6 +36,6 @@
 </p>
 
 ------------------------------------------
-<h4 align="center">Made by Team <img src="./assests/code.png" heigth=80px width=80px > with <img src="./assests/Love.png" heigth=10px width=15px>.</h4>
+<h4 align="center">Made by Team <img src="./assests/Codecell.PNG" heigth=80px width=80px > with <img src="./assests/Love.png" heigth=10px width=15px>.</h4>
 
 
