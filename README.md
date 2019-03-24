@@ -31,7 +31,7 @@
 </p>
 
 ------------------------------------------
-### Bot Links
+### Test the Bot
 - <a href="https://www.facebook.com/kjscecodecell/">Facebook</a>
 - Telegram : @KJSCECodeCellBot
 - Phone Gateway : +1 312-741-4354
