@@ -22,7 +22,7 @@
 
 ------------------------------------------
 ### Technology Stack
-<img src="./assests/webhook.PNG" height=80px ><img src="./assests/RestAPI.PNG" height=80px ><img src="./assests/ngrok.PNG" height=80px ><img src="./assests/Messenger.PNG" height=80px ><img src="./assests/Heroku.PNG" height=80px ><img src="./assests/Gunicorn.PNG" height=80px ><img src="./assests/Dialogue Flow.PNG" height=80px >
+<img src="./assests/ngrok.PNG" height=80px >  <img src="./assests/Messenger.PNG" height=80px >  <img src="./assests/Heroku.PNG" height=80px >  <img src="./assests/Dialogue Flow.PNG" height=80px >
 
 ------------------------------------------
 <p align="center">
