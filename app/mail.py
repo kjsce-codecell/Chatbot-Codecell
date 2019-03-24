@@ -9,12 +9,10 @@ def sendMail(email,ImgFileName):
     smtp_server = "smtp.gmail.com"
     port = 587 
     #Enter sender and reviever emails below
-    sender = "codecell.engg@somaiya.edu"
-    #Sender mail should have less secure apps enabled 
+    sender = "sample@example.com"
+    #Sender mail should have less secure apps enabled or use app password 
     reciever = email
-    # recievers=["aditya.prajapati@somaiya.edu","karan.sheth@somaiya.edu","dhruvi.vadalia@somaiya.edu","rushang.g@somaiya.edu","akshay.padte@somaiya.edu"]
-    # recievers=["hetal.kuvadia@somaiya.edu"]
-
+    
     txt = MIMEMultipart("alternative")
 
     #Specify subject of mail, sender and reciever 
@@ -59,7 +57,7 @@ def sendMail(email,ImgFileName):
 
     
     #Input password from user 
-    password = 'kauxtcfedhruytxl'
+    password = ''
     con = ssl.create_default_context()
     server = smtplib.SMTP(smtp_server, port)
     FROMADDR = "%s <%s>" % ('KJSCE CodeCell', sender)
@@ -70,5 +68,3 @@ def sendMail(email,ImgFileName):
     server.sendmail(FROMADDR, reciever, txt.as_string())
 
     print("Succesfully sent the mails!")
-
-#sendMail('karan.sheth@somaiya.edu','passes/r.jpeg')

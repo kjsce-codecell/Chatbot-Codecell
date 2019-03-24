@@ -28,5 +28,3 @@ def pass_gen(name,email):
 	img.paste(img1, (350,292))
 	img.save(s_path)
 	return s+".png"
-
-pass_gen('Akshay Padte','akshay.padte@somaiya.edu')
