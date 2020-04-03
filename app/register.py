@@ -1,9 +1,10 @@
 
-def register_Name(req,data):
+def register_Name(req, data):
     res = {"fulfillmentMessages": [
         {
             "image": {
-                "imageUri": 'http://sov.surge.sh/Sources%20of%20vitamins_files/Chatbot_Poster.jpeg', #Replace with current poster
+                # Replace with current poster
+                "imageUri": 'http://sov.surge.sh/Sources%20of%20vitamins_files/Chatbot_Poster.jpeg',
                 "accessibilityText": 'Event Poster'
             }
         },
@@ -27,42 +28,44 @@ def register_Name(req,data):
                     "Let's start with something simple \nWhat's your Name - the one written on your birth certificate?"
                 ]
             }
-        }, 
+        },
         {
             "telephonySynthesizeSpeech": {
                 "text": "To get you registered, we need some details.Give us your name - the one on your birth certificate."
             }
         }
     ]}
-    print(res,'Nameeee')
+    print(res, 'Nameeee')
     return res
 
 
 def register_Email(req, data):
-    
+
     res = {
         "fulfillmentMessages": [
-        {
-            "text": {
-                "text": [
-                    "Hello there " + str(data[0][1]) + " \nIts nice to know your name, now I can stalk you🙃"
-                ]
+            {
+                "text": {
+                    "text": [
+                        "Hello there " +
+                        str(data[0][1]) +
+                        " \nIts nice to know your name, now I can stalk you🙃"
+                    ]
+                }
+            },
+            {
+                "text": {
+                    "text": [
+                        "Oh I also need your Email ID, for better stalking purposes \n _wink wink_"
+                    ]
+                }
+            },
+            {
+                "telephonySynthesizeSpeech": {
+                    "text": "So " + str(data[0][1]) + "I hope I pronounced your name correctly, we need your email id"
+                }
             }
-        },
-        {
-            "text": {
-                "text": [
-                    "Oh I also need your Email ID, for better stalking purposes \n _wink wink_" 
-                ]
-            }
-        },
-        {
-            "telephonySynthesizeSpeech": {
-                "text": "So " + str(data[0][1]) + "I hope I pronounced your name correctly, we need your email id"
-            }
-        }
-    ]}
-    print(res, 'Emaill') 
+        ]}
+    print(res, 'Emaill')
     return res
 
 
@@ -82,7 +85,7 @@ def register_College(req, data):
     return res
 
 
-def register_Year(req,data):
+def register_Year(req, data):
     res = {
         "fulfillmentMessages": [
             {
@@ -102,12 +105,12 @@ def register_Year(req,data):
                 }
             }
         ]
-        }
+    }
     print(res, 'Studyyy')
     return res
 
 
-def register_Branch(req,data):
+def register_Branch(req, data):
     res = {
         "fulfillmentMessages": [
             {
@@ -132,11 +135,12 @@ def register_Branch(req,data):
     print(res, 'Branchh')
     return res
 
-def registered_success(req,data,img_url):
+
+def registered_success(req, data, img_url):
     # res = {
     #     "fulfillmentMessages": [
     #         {
-                
+
     #             "text": {
     #                 "text": [
     #                     "Yayy!! you are successfully registered"
@@ -176,7 +180,7 @@ def registered_success(req,data,img_url):
             },
             {
                 "image": {
-                    "imageUri": img_url, #Aditya Wala Image
+                    "imageUri": img_url,  # Aditya Wala Image
                     "accessibilityText": 'string'
                 }
             },
@@ -191,9 +195,9 @@ def registered_success(req,data,img_url):
                 "telephonySynthesizeSpeech": {
                     "text": "Awesome, so I'll just fill in the form for you quickly. Aaaaaaaand.....its done , you have been successfully registered for the event! \n Be there or be square◾ \n😊"
                 }
-            } 
-        ] 
-        }
+            }
+        ]
+    }
     print(res, 'successs')
     return res
 
@@ -208,7 +212,7 @@ def registered_failed(req, data):
                     ]
                 }
             },
-            
+
         ]
     }
     return res

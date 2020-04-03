@@ -1,28 +1,26 @@
 import getpass as gp
-import smtplib, ssl
+import smtplib
+import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 import os
 
-def sendMail(email,ImgFileName):
+
+def sendMail(email, ImgFileName):
     smtp_server = "smtp.gmail.com"
-    port = 587 
-    #Enter sender and reviever emails below
-    sender = "sample@example.com"
-    #Sender mail should have less secure apps enabled or use app password 
+    port = 587
+    # Enter sender and reviever emails below
+    sender = os.getenv('EMAIL_ID')
+    # Sender mail should have less secure apps enabled or use app password
     reciever = email
-    
+
     txt = MIMEMultipart("alternative")
 
-    #Specify subject of mail, sender and reciever 
+    # Specify subject of mail, sender and reciever
     txt["Subject"] = "Workshop registration ACK"
     txt["From"] = sender
-
-
-    
-    
-    #Content of the mail to be sent
+    # Content of the mail to be sent
     str1 = '''<html>
             <body>
             
@@ -45,7 +43,7 @@ def sendMail(email,ImgFileName):
             </html>'''
     str1 = MIMEText(str1, "html")
     txt.attach(str1)
-    
+
     # This example assumes the image is in the current directory
     fp = open(ImgFileName, 'rb')
     msgImage = MIMEImage(fp.read())
@@ -55,9 +53,8 @@ def sendMail(email,ImgFileName):
     msgImage.add_header('Content-ID', '<image1>')
     txt.attach(msgImage)
 
-    
-    #Input password from user 
-    password = ''
+    # Input password from user
+    password = os.getenv('EMAIL_PASSWORD')
     con = ssl.create_default_context()
     server = smtplib.SMTP(smtp_server, port)
     FROMADDR = "%s <%s>" % ('KJSCE CodeCell', sender)

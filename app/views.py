@@ -1,11 +1,13 @@
 # views.py
 
-from flask import render_template,make_response,jsonify,request,session
+from flask import send_file
+from flask import render_template, make_response, jsonify, request, session
 
 from app import app
 import json
 from .respond import *
-import os,pickle 
+import os
+import pickle
 from .respond import handle_song, handle_team
 from .database import *
 
@@ -19,34 +21,33 @@ def webhook():
     """
     req = request.get_json(silent=True, force=True)
     try:
-        #extract action and intent
+        # extract action and intent
         action = req.get('queryResult').get('action')
         intent = req.get('queryResult').get('intent').get('displayName')
     except AttributeError:
         return 'json error'
-    
-    #insert into database 
+
+    # insert into database
     try:
         count()
-        print("Counter Called")
-        fb_id = req['queryResult']['outputContexts'][0]['parameters'].get("facebook_sender_id")
+        fb_id = req['queryResult']['outputContexts'][0]['parameters'].get(
+            "facebook_sender_id")
         user_freq(fb_id)
     except:
         print("FB_ID_NOT found")
-    print(get_contexts(req))
 
-    # Add processing for all the queries here according to detected intent 
+    # Add processing for all the queries here according to detected intent
     print('Action: ' + str(action))
     if intent == 'song':
         return jsonify({"fulfillmentMessages": [{
-                    "text": {
-                        "text":["jam"],
-                    }
-                }],
-                "followupEventInput": {
+            "text": {
+                        "text": ["jam"],
+                        }
+        }],
+            "followupEventInput": {
                 "name": "songin",
                 "languageCode": "en-US"
-                }
+        }
         })
     elif intent == 'songin':
         return handle_song(req)
@@ -60,30 +61,20 @@ def webhook():
         return make_response(jsonify(res))
     elif action == 'team':
         res = team(req)
-        print(res)
         return res
-    elif action == 'team_info':
-        res = team_info(req)
-        print(res)
-        return make_response(jsonify(res))
     elif action == 'myfunction':
         res = myfunction(req)
-        print(res)
         return make_response(jsonify(res))
     else:
-        print('WrongggRegister')
-        res = 'Kittu' 
+        res = 'Kittu'
     print('Response: ' + res)
     return make_response(jsonify({'fulfillmentText': res}))
 
 
- 
-#for hosting image for autosending
+# for hosting image for autosending
 
-from flask import send_file
 
 @app.route('/get_image')
 def get_image():
     filename = 'static/passes/' + request.args.get('name')
     return send_file(filename, mimetype='image/jpeg')
-

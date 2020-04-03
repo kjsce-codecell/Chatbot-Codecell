@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import os
-mongodb_url = str(os.environ["CODECELL_CHATBOT_MONGODB"])
+mongodb_url = str(os.environ["MONGODB"])
 
 
 def connect():
@@ -25,13 +25,14 @@ def add_participant(participant):
     db.insert(participant)
     return 1
 
+
 def user_freq(user_id):
     db = connect().logs
-    user = {'fb_id':user_id}
+    user = {'fb_id': user_id}
     if db.find_one(user):
         print("User found")
         try:
-            db.update(user,{"$inc":{"messages": 1}})
+            db.update(user, {"$inc": {"messages": 1}})
             print("Messages Updated")
         except:
             print("Update Error")
@@ -46,11 +47,12 @@ def count():
     db = connect().logs
     print("Counter")
     try:
-        db.update({"counter":True},{"$inc":{"messages":1}})
+        db.update({"counter": True}, {"$inc": {"messages": 1}})
         print("Update successful")
     except:
         print("Update error")
     return 1
+
 
 def test():
     participant = {

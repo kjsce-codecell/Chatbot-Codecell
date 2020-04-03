@@ -1,4 +1,8 @@
-import re, os, random, requests, string
+import re
+import os
+import random
+import requests
+import string
 from .responses import *
 from pprint import pprint
 from .register import *
@@ -11,6 +15,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from flask import jsonify, request
 from PIL import Image, ImageDraw, ImageFont
+
 
 def get_contexts(req):
     contexts = {}
@@ -34,9 +39,9 @@ def welcome(req):
         # Rushangs Database increase count function which will probably record more stuff also this in try catch pplzz
         try:
             count()
-            print("Counter Called")
             #print("Contexts : ",req['queryResult']['outputContexts'])
-            fb_id = req['queryResult']['outputContexts'][0]['parameters'].get("facebook_sender_id")
+            fb_id = req['queryResult']['outputContexts'][0]['parameters'].get(
+                "facebook_sender_id")
             #print("FB id :",fb_id)
             user_freq(fb_id)
         except:
@@ -99,13 +104,13 @@ def welcome(req):
                     }
                 },
                 {
-                "quickReplies": {
-                    "title": 'Some things to try out:',
-                    "quickReplies": [
-                        'Register for the workshop',
-                        'Sing Along',
-                        'About Team'
-                    ]
+                    "quickReplies": {
+                        "title": 'Some things to try out:',
+                        "quickReplies": [
+                            'Register for the workshop',
+                            'Sing Along',
+                            'About Team'
+                        ]
                     }
                 },
                 {
@@ -132,31 +137,30 @@ def register(req):
             fun = globals()['register_' + i[0]]
             res = fun(req, data)
             return res
-    print(data)
     participant = {}
     for field in data:
         participant[field[0]] = field[1]
     if add_participant(participant):
         fill_form(data)
-        pass_name = pass_gen(participant['Name'],participant['Email'])
+        pass_name = pass_gen(participant['Name'], participant['Email'])
         # data.append(['Pass_Name',pass_name])
         img_url = request.url_root + 'get_image?name=' + pass_name
         try:
-            sendMail(participant['Email'],'app/static/passes/'+pass_name)
+            sendMail(participant['Email'], 'app/static/passes/'+pass_name)
         except Exception as e:
             print(str(e))
             print('email failed')
             pass
-        res = registered_success(req, data,img_url)
+        res = registered_success(req, data, img_url)
     else:
-        res = registered_failed(req, data) #Email id exists
+        res = registered_failed(req, data)  # Email id exists
     return res
+
 
 def team(req):
     queryText = req['queryResult']['queryText']
-    print(queryText)
     if 'What does the ' in req['queryResult']['queryText'] or 'List the members of ' in req['queryResult']['queryText']:
-        return handle_team(req) 
+        return handle_team(req)
     part = req['queryResult']['parameters'].get('teampart')
     contexts = get_contexts(req)
     text = ''
@@ -177,50 +181,41 @@ def team(req):
                     break
         if text == '':
             text = "I'm sorry. I didn't quite get that"
-    print(text, part)
     texts = text.split('<br>')[:-1]
     return gen_res(texts)
 
 
 def handle_team(req):
-    print(req) 
-    print('\nnhandle\n')
-    print(req['queryResult'])
     querytext = req['queryResult']['queryText']
-    print(querytext)
     part = req['queryResult']['parameters'].get('teampart')
-    print(part)
-    response_text=''
+    response_text = ''
     if 'List the members of ' in querytext:
         i = 0
-        if part[i]=='Council':
-            i+=1
+        if part[i] == 'Council':
+            i += 1
         response_text = part[i]+'\n\n'
-        mem=team_members[part[i]]
-        #print(mem)
+        mem = team_members[part[i]]
         for member in mem:
             response_text += member[0]+'\n'
     else:
         i = 0
-        if part[i]=='Council':
-            i+=1
+        if part[i] == 'Council':
+            i += 1
         response_text = part[i]+'\n\n'
-        response_text+=team_description[part[i]]['task']
-        
-    print('\n\n'+response_text)
+        response_text += team_description[part[i]]['task']
+
     return jsonify({
         "fulfillmentMessages": [{
-                    "text": {
-                        "text": [response_text]
-                    }
+            "text": {
+                "text": [response_text]
+            }
         }]
     })
+
 
 def gen_res(li):
     res = {"fulfillmentMessages": [
     ]}
-    print(li, len(li))
-    print(type(li))
     for i in range(0, len(li), 3):
         card = {
             'card': {
@@ -246,12 +241,11 @@ def gen_res(li):
         #     "languageCode": "en-US"
         # }
 
-    print(res)
     return jsonify(res)
 
 
 def fill_form(data):
-    #fill google form using get request dont forget to update if form is changed
+    # fill google form using get request dont forget to update if form is changed
     url = 'https://docs.google.com/forms/d/e/1FAIpQLSdqBWG3rFSRYNvwfzfB9ZYY6MqGwXYnV9QwHiQ6rylSha33Aw/formResponse'
     form_data = {'entry.1109606640': data[0][1],
                  'entry.686652295': data[1][1],
@@ -269,10 +263,11 @@ def fill_form(data):
     return
 
 
-#functions used for song matching 
+# functions used for song matching
 def get_cosine_sim(*strs):
     vectors = [t for t in get_vectors(*strs)]
     return cosine_similarity(vectors)
+
 
 def get_vectors(*strs):
     text = [t for t in strs]
@@ -293,8 +288,8 @@ def matches(inp, lines):
         gcls.append(int(gcl*1000000))
         # print('START', count,' :\n', line, '\n', gcl, end='\n\n')
         count += 1
-    print(gcls.index(max(gcls)))
     return gcls.index(max(gcls))
+
 
 def getsongname(lyrics):
 
@@ -311,10 +306,10 @@ def getsongname(lyrics):
         # url2=d['results'][0]['clicktrackUrl'][29:].split('&')[0]
         r2 = requests.get('https://www.googleapis.com/customsearch/v1?q='+lyrics +
                           '&cx=010037727290940322759%3Alfq5lr9jjek&num=1&key=AIzaSyBE_yhmpb0CwmSHG0d4KPh91YEFrgyvIy4')
-        print('here 1,1')
+
         d = eval(r2.text)
         url2 = d['items'][0]['link']
-        print('here 1,2')
+
         title = d['items'][0]['pagemap']['metatags'][0]['og:title']
 
         t = requests.get(url2).text
@@ -324,14 +319,12 @@ def getsongname(lyrics):
         lines = song.split('\n')
         lines = [i for i in lines if (i != '' and i[0] != '[')]
         lno = matches(lyrics, lines)
-        print('here 1,3')
-        print(len(lines))
+
         if lno >= len(lines):
             conti = '...'
         else:
             conti = lines[lno+1]
         # title = soup.find_all('h1', attrs={'class':'header_with_cover_art-primary_info-title'})[0].text.split('(')[0]
-        print('1 runs')
     except:
         r = requests.get('https://songsear.ch/q/'+lyrics)
         soup = BeautifulSoup(r.text)
@@ -349,10 +342,7 @@ def getsongname(lyrics):
             rer += e
         title = l[0].find('a').text.split('(')[0]
         conti = rer
-        print('2 runs')
 
-    print('title', title)
-    print('conti', conti)
     return title, conti
 
 
@@ -375,7 +365,9 @@ def handle_song(req):
     }],
     })
 
-#who gave name as mydunction??
+# who gave name as mydunction??
+
+
 def myfunction(req):
     res = {
         "fulfillmentMessages": [
